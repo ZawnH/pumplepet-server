@@ -30,24 +30,12 @@ curl -X POST http://localhost:8000/auth/login \
 
 ## Expected Responses
 
-### Successful Register
+### Successful Register/Login
 ```json
 {
   "user": {
     "id": 1,
     "username": "testuser",
-    "email": "test@example.com",
-    "is_owner": false
-  }
-}
-```
-
-### Successful Login
-```json
-{
-  "user": {
-    "id": 1,
-    "username": "testuser", 
     "email": "test@example.com",
     "is_owner": false
   }
