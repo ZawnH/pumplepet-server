@@ -1,0 +1,26 @@
+# Environment variables
+.env
+
+# OS files
+.DS_Store
+
+# Binary files
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+
+# Test binary
+*.test
+
+# Output of the go coverage tool
+*.out
+
+# IDE directories
+.idea/
+.vscode/
+
+# Temporary files
+tmp/
+temp/
