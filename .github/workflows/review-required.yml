@@ -1,0 +1,28 @@
+name: Enforce Review Before Merging
+on:
+  pull_request:
+    types: [opened, synchronize]
+
+jobs:
+  enforce-review:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check PR Approval
+        run: |
+          PR_NUMBER=${{ github.event.pull_request.number }}
+          REPO=${{ github.repository }}
+
+          REVIEWS=$(curl -s -H "Authorization: Bearer $GITHUB_TOKEN" \
+            -H "Accept: application/vnd.github.v3+json" \
+            "https://api.github.com/repos/$REPO/pulls/$PR_NUMBER/reviews" | jq 'map(select(.state == "APPROVED")) | length')
+
+          if [ "$REVIEWS" -eq 0 ]; then
+            echo "PR must be reviewed before merging!"
+            curl -X POST -H "Authorization: Bearer $GITHUB_TOKEN" \
+              -H "Accept: application/vnd.github.v3+json" \
+              -d '{"state": "closed"}' \
+              "https://api.github.com/repos/$REPO/pulls/$PR_NUMBER"
+            exit 1
+          fi
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
