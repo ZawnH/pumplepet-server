@@ -15,16 +15,15 @@ type User struct {
 	DeletedAt gorm.DeletedAt `gorm:"index" json:"-"`
 
 	// Metadata
-	UserMetadata UserMetadata `gorm:"foreignKey:UserID" json:"metadata"`
+	UserMetadata UserMetadata `gorm:"foreignKey:UserID;references:ID" json:"metadata"`
 	
 	// Relationships
-	Pets []Pet `gorm:"many2many:is_owner" json:"pets,omitempty"`
+	Pets []Pet `gorm:"foreignKey:UserID" json:"pets,omitempty"` // User's pets (one-to-many)
 }
 
 // UserMetadata stores additional information about a user
 type UserMetadata struct {
-	ID              uint           `gorm:"primaryKey" json:"id"`
-	UserID          uint           `gorm:"not null;uniqueIndex" json:"user_id"`
+	UserID          uint           `gorm:"primaryKey" json:"user_id"` // Using UserID as the primary key
 	HomeEnvironment string         `json:"home_environment"`
 	LifeStyle       string         `json:"life_style"`
 	Preferences     string         `json:"preferences"` // Could also be a JSON field
