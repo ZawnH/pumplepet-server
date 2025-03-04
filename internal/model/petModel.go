@@ -12,9 +12,6 @@ type Pet struct {
 	Species   string         `gorm:"not null" json:"species"`
 	UserID    uint           `json:"user_id"`             // Foreign key to the owner
 	AdoptedAt *time.Time     `json:"adopted_at,omitempty"` // When the pet was adopted (if at all)
-	CreatedAt time.Time      `json:"created_at"`
-	UpdatedAt time.Time      `json:"updated_at"`
-	DeletedAt gorm.DeletedAt `gorm:"index" json:"-"`
 
 	// Metadata
 	PetMetadata PetMetadata `gorm:"foreignKey:PetID;references:ID" json:"metadata"`
