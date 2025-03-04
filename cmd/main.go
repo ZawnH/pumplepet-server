@@ -4,8 +4,11 @@ import (
 	"log"
 	"os"
 
-	"pumplepet-server/pkg/database"
 	"pumplepet-server/internal/routes"
+	"pumplepet-server/internal/websocket"
+	"pumplepet-server/pkg/database"
+
+	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 	"github.com/joho/godotenv"
 )
@@ -27,9 +30,16 @@ func main() {
 	router := gin.New()
 	router.Use(gin.Logger())
 
+	// Add CORS middleware
+	router.Use(cors.Default())
+
+	// Initialize WebSocket manager
+	wsManager := websocket.NewManager()
+	go wsManager.Run()
+
 	// Routes
 	routes.AuthRoutes(router)
+	routes.ChatRoutes(router, wsManager)
 
 	router.Run(":" + port)
 }
-
