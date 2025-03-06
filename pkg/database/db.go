@@ -5,6 +5,7 @@ import (
 	"log"
 	"os"
 	"pumplepet-server/internal/model"
+
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 )
@@ -28,7 +29,7 @@ func ConnectDB() {
 	}
 
 	// Auto migrate the database
-	err = DB.AutoMigrate(&model.User{})
+	err = DB.AutoMigrate(&model.User{}, &model.Message{})
 	if err != nil {
 		log.Fatal("Failed to migrate database:", err)
 	}

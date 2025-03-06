@@ -5,46 +5,12 @@
 2. `.env` file with database credentials
 3. Run `go run cmd/main.go` to start server
 
-## Authentication Endpoints
-
-### Register User
-```bash
-curl -X POST http://localhost:8000/auth/register \
-  -H "Content-Type: application/json" \
-  -d '{
-    "username": "testuser",
-    "email": "test@example.com", 
-    "password": "password123"
-  }'
-```
-
-### Login User
-```bash
-curl -X POST http://localhost:8000/auth/login \
-  -H "Content-Type: application/json" \
-  -d '{
-    "email": "test@example.com",
-    "password": "password123"
-  }'
-```
-
-## Expected Responses
-
-### Successful Register/Login
-```json
-{
-  "user": {
-    "id": 1,
-    "username": "testuser",
-    "email": "test@example.com",
-    "is_owner": false
-  }
-}
-```
-
-### Error Response
-```json
-{
-  "error": "Error message here"
-}
-```
+## Environment Variables
+- `PORT`
+- `DB_HOST`
+- `DB_USER`
+- `DB_PASSWORD`
+- `DB_NAME`
+- `DB_PORT`
+- `JWT_SECRET`
+- `JWT_EXPIRATION`

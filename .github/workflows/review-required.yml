@@ -2,6 +2,8 @@ name: Enforce Review Before Merging
 on:
   pull_request:
     types: [opened, synchronize, ready_for_review]
+  pull_request_review:
+    types: [submitted]
 
 jobs:
   check-reviews:
