@@ -3,6 +3,7 @@ package auth
 import (
 	"net/http"
 	"pumplepet-server/internal/service/auth"
+
 	"github.com/gin-gonic/gin"
 )
 
