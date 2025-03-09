@@ -13,6 +13,7 @@ type User struct {
 	Password  string         `gorm:"not null" json:"-"` // Password is not exposed in JSON
 	IsOwner   bool           `gorm:"default:false" json:"is_owner"` // Indicates if user owns any pets
 	LikedPets []uint         `gorm:"type:jsonb" json:"liked_pets"` // Array of pet IDs that the user liked
+
 	CreatedAt time.Time      `json:"created_at"` // Standard GORM fields
 	UpdatedAt time.Time      `json:"updated_at"`
 	DeletedAt gorm.DeletedAt `gorm:"index" json:"-"`

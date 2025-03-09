@@ -3,6 +3,7 @@ package auth
 import (
 	"net/http"
 	"pumplepet-server/internal/service/auth"
+
 	"github.com/gin-gonic/gin"
 )
 
@@ -31,11 +32,14 @@ func Login(c *gin.Context) {
 		return
 	}
 
-	user, err := auth.LoginUser(input.Email, input.Password)
+	response, err := auth.LoginUser(input.Email, input.Password)
 	if err != nil {
 		c.JSON(http.StatusUnauthorized, gin.H{"error": "Invalid credentials"})
 		return
 	}
 
-	c.JSON(http.StatusOK, gin.H{"user": user})
+	c.JSON(http.StatusOK, gin.H{
+		"user":  response.User,
+		"token": response.Token,
+	})
 }
