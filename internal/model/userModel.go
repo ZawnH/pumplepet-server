@@ -11,6 +11,7 @@ type User struct {
 	Username  string         `gorm:"not null;uniqueIndex" json:"username"`
 	Email     string         `gorm:"not null;uniqueIndex" json:"email"`
 	Password  string         `gorm:"not null" json:"-"` // Password is not exposed in JSON
+	IsOwner   bool           `gorm:"default:false" json:"is_owner"` // Indicates if user owns any pets
 	CreatedAt time.Time      `json:"created_at"` // Standard GORM fields
 	UpdatedAt time.Time      `json:"updated_at"`
 	DeletedAt gorm.DeletedAt `gorm:"index" json:"-"`
