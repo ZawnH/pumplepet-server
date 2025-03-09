@@ -22,7 +22,7 @@ func RegisterUser(username, email, password string) (*model.User, error) {
 
 	user := model.User{
 		Username: username,
-		Email:    email,
+		Email: email,
 		Password: hashedPassword,
 	}
 
